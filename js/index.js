@@ -68,7 +68,6 @@ const soundOn =
 const soundOff =
 	"<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' fill='white' class='bi bi-volume-mute-fill' viewBox='0 0 16 16'><path d='M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z'/></svg>";
 
-
 //////////////////
 // Global State //
 //////////////////
@@ -153,8 +152,6 @@ const handlePointerDown = (element, handler) => {
 // Converts a number into a formatted string with thousand separators.
 const formatNumber = (num) => num.toLocaleString();
 
-
-
 // hud.js
 // ============================================================================
 // ============================================================================
@@ -200,12 +197,15 @@ function renderBonusEffect(timeNode, totalScoreNode) {
 	const countingUpRate = 5;
 	bonusIntervalId = setInterval(() => {
 		if (state.game.time < levels[state.game.level].maxTime) {
+			timeUpSound.play();
 			const seconds = pad(++state.game.time % 60);
 			timeNode.innerText = `0:${pad(
 				parseInt(state.game.time / 60, 10)
 			)}:${seconds}`;
 		} else {
+			timeUpSound.pause();
 			totalScoreNode.innerText = formatNumber(state.game.totalScore);
+			bonusSound.play();
 			if (isNewHighScore()) {
 				highScoreLblNode.textContent = "New High Score!";
 				setHighScore(state.game.totalScore);
@@ -258,7 +258,6 @@ const getMolAlert = (iconNode, alertMessage) => {
 	}, 1500);
 };
 
-
 ///////////
 // Sound //
 ///////////
@@ -266,8 +265,12 @@ const soundBtnNode = $(".sound-control");
 function renderSoundIcon() {
 	soundBtnNode.innerHTML = state.sound ? soundOn : soundOff;
 }
-
 renderSoundIcon();
+
+const bonusSound = new Audio("./js/bg-music/bonusPoint.mp3");
+const correctSound = new Audio("./js/bg-music/correctAns.mp3");
+const timeUpSound = new Audio("./js/bg-music/rackingUpBonus.mp3");
+const wrongDupSound = new Audio("./js/bg-music/wrongDupAns.mp3");
 
 //////////////////
 // Pause Button //
@@ -412,7 +415,6 @@ handleClick($(".close-tutorial-btn--pause"), () => {
 //////////////////
 // MENU ACTIONS //
 //////////////////
-
 function setActiveMenu(menu) {
 	state.menus.active = menu;
 	renderMenus();
@@ -421,7 +423,6 @@ function setActiveMenu(menu) {
 /////////////////
 // HUD ACTIONS //
 /////////////////
-
 function setLvlScore(score) {
 	state.game.lvlScore = score;
 	renderScoreHud();
@@ -605,12 +606,15 @@ const checkOneMol = async () => {
 					changeScore(levels[state.game.level].molScore);
 					displayCorrectAns(data["molBlock"]);
 					clearCanvas();
+					correctSound.play();
 					getMolAlert(correctIcon, CORRECT);
 				} else if (!notDup) {
 					changeScore(-dupDeduct);
+					wrongDupSound.play();
 					getMolAlert(duplicateIcon, DUPLICATED);
 				} else {
 					changeScore(-incorrectDeduct);
+					wrongDupSound.play();
 					getMolAlert(wrongIcon, INCORRECT);
 				}
 			});
@@ -652,13 +656,15 @@ const checkMolAndLvl = async () => {
 				if (foundAll) {
 					clearInterval(intervalId);
 					clearCanvas();
-
 					if (state.game.level == 7) {
 						endGame();
 					} else {
 						endLevel();
 					}
-				} else getMolAlert(unfinishIcon, UNFINISHED);
+				} else {
+					wrongDupSound.play();
+					getMolAlert(unfinishIcon, UNFINISHED);
+				}
 			});
 		})
 		.catch((e) => {
@@ -673,7 +679,6 @@ handleClick($("#check-level"), checkMolAndLvl);
 ////////////////////////
 // KEYBOARD SHORTCUTS //
 ////////////////////////
-
 window.addEventListener("keydown", (event) => {
 	if (event.key === "p") {
 		isPaused() ? resumeGame() : pauseGame();
