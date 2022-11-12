@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 
 <head>
     <meta charset="UTF-8">
@@ -123,7 +123,9 @@
                         <li>The found molecules are on the right, both 2D and 3D. Try rotating the 3D :)</li>
                     </ol>
                 </div>
-                <img class="game-interface" src="./js/tutorial.png" />
+                <div class="game-interface">
+                    <canvas id="pause--c">Test sketcher canvas</canvas>
+                </div>
             </div>
             <button type="button" class="button close-tutorial-btn--pause">Close tutorial</button>
         </div>
@@ -156,7 +158,9 @@
                         <li>The found molecules are on the right, both 2D and 3D. Try rotating the 3D :)</li>
                     </ol>
                 </div>
-                <img class="game-interface" src="./js/tutorial.png" />
+                <div class="game-interface">
+                    <canvas id="main--c">Test sketcher canvas</canvas>
+                </div>
             </div>
             <button type="button" class="button close-tutorial-btn--main">Close tutorial</button>
         </div>
@@ -164,15 +168,16 @@
 
     <!-- Game canvas -->
     <div class="game">
-        <div class="game--space">
-            <canvas id="c">Sketcher canvas</canvas>
-            <div class="game--command">
-                <button class="button game-btn" id="check-single">Check molecule</button>
-                <button class="button game-btn" id="check-level">Check level</button>
+        <div>
+            <div class="game--space">
+                <canvas id="game--canvas">Sketcher canvas</canvas>
+                <div class="game--command">
+                    <button class="button game-btn" id="check-single">Check molecule</button>
+                    <button class="button game-btn" id="check-level">Check level</button>
+                </div>
             </div>
         </div>
         <div class="duplicates">
-            <h2>You have found these isomers</h2>
         </div>
     </div>
 

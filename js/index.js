@@ -12,8 +12,8 @@ const dupDeduct = 5;
 const incorrectDeduct = 10;
 
 // Game constants
-// const endPoint = "http://127.0.0.1:5000/";
-const endPoint = "https://chem120-game.up.railway.app/";
+const endPoint = "http://127.0.0.1:5000/";
+// const endPoint = "https://chem120-game.up.railway.app/";
 
 // Interaction state
 let pointerIsDown = false;
@@ -102,7 +102,7 @@ const isPaused = () => state.menus.active === MENU_PAUSE;
 // canvas.js
 // ============================================================================
 // ============================================================================
-const setUpCanvas = () => {
+const setUpCanvas = (canvasId) => {
 	// Initiate the canvas
 	const options = {
 		useService: true,
@@ -113,7 +113,7 @@ const setUpCanvas = () => {
 	// Set up the ChemDoodle SketcherCanvas component
 	ChemDoodle.ELEMENT["H"].jmolColor = "black";
 	ChemDoodle.ELEMENT["S"].jmolColor = "#B9A130";
-	const sketcher = new ChemDoodle.SketcherCanvas("c", 600, 400, options);
+	const sketcher = new ChemDoodle.SketcherCanvas(canvasId, 600, 400, options);
 
 	sketcher.styles.atoms_displayTerminalCarbonLabels_2D = true;
 	sketcher.styles.atoms_useJMOLColors = true;
@@ -126,8 +126,14 @@ const setUpCanvas = () => {
 // index.js
 // ============================================================================
 // ============================================================================
-const sketcher = setUpCanvas();
+const gameCanvasId = "game--canvas";
+const mainTestCanvasId = "main--c";
+const pauseTestCanvasId = "pause--c";
+const sketcher = setUpCanvas(gameCanvasId);
 // const toolbar = new ChemDoodle.uis.gui.desktop.ToolbarManager(sketcher);
+
+setUpCanvas(mainTestCanvasId);
+setUpCanvas(pauseTestCanvasId)
 
 // utils.js
 // ============================================================================
@@ -353,6 +359,7 @@ renderMenus();
 ////////////////////
 const startGameLvl1 = () => {
 	clearInterval(intervalId);
+	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	$(".timer").innerText = "0:00:00";
 	resetGame();
 	setLevel(0);
@@ -360,6 +367,7 @@ const startGameLvl1 = () => {
 };
 
 const startLvl = () => {
+	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	clearInterval(intervalId);
 	$(".timer").innerText = "0:00:00";
 	setLevel(getLocalStorage(curLvlKey));
@@ -517,6 +525,7 @@ const setViewCanvas = (viewCanvas, molBlock, transform = false) => {
 
 const displayCorrectAns = (molBlock) => {
 	const molLs = $(".duplicates");
+	console.log(molLs)
 	const span = document.createElement("span");
 	const canvas2d = document.createElement("canvas");
 	const canvas3d = document.createElement("canvas");

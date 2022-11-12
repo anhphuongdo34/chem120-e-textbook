@@ -32,7 +32,7 @@ body {
 .game {
 	visibility: hidden;
 	display: flex;
-	justify-content: left;
+	max-height: 80vh;
 	gap: 10vh;
 	margin: 5vh 5vh;
 }
@@ -44,6 +44,7 @@ body {
 .game--space {
 	background-color: rgba(255, 255, 255, 0.80);
 	margin: 0.8em 0.6em;
+	border-radius: 15px;
 }
 
 .game--command {
@@ -57,6 +58,20 @@ body {
 	touch-action: none;
 	transform: translateZ(0);
 }
+
+.game > .duplicates {
+	max-height: inherit;
+	overflow-y: auto;
+	overflow-x: auto;
+	border: solid;
+	border-radius: 15px;
+	border-width: 3px;
+	border-color: #fff;
+}
+
+.duplicates::-webkit-scrollbar {
+	display: none;
+  }
 
 .duplicates>h2 {
 	margin: 0.8em 0.6em;
@@ -96,7 +111,7 @@ body {
 	color: magenta;
 }
 
-.alert{
+.alert {
 	position: absolute;
 	visibility: hidden;
 	z-index: 7;
@@ -104,7 +119,7 @@ body {
 	right: 0;
 	top: 52%;
 	margin: auto;
-	color:rgb(252, 235, 6);
+	color: rgb(252, 235, 6);
 }
 
 .mol-check.active {
@@ -283,7 +298,7 @@ sub {
 	font-size: 2rem;
 }
 
-.level-descrptn{
+.level-descrptn {
 	font-size: 2rem;
 }
 
@@ -421,6 +436,7 @@ menu--tutorial-main {
 	border: solid;
 	border-color: #fff;
 	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Only enable hover state on large screens */
@@ -434,3 +450,5 @@ menu--tutorial-main {
 		opacity: 1;
 	}
 }
+
+/* @media () */
