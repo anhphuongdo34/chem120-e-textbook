@@ -205,7 +205,6 @@ function renderBonusEffect(timeNode, totalScoreNode) {
 		} else {
 			timeUpSound.pause();
 			totalScoreNode.innerText = formatNumber(state.game.totalScore);
-
 			state.game.time = 0;
 			bonusSound.play();
 			if (isNewHighScore()) {
@@ -263,6 +262,8 @@ const getMolAlert = (iconNode, alertMessage) => {
 ///////////
 // Sound //
 ///////////
+$(".bg-music-src").src = "./js/bg-music/bgMusic.wav"
+$("#bg-music").play()
 const soundBtnNode = $(".sound-control");
 function renderSoundIcon() {
 	soundBtnNode.innerHTML = state.sound ? soundOn : soundOff;
@@ -478,7 +479,6 @@ function endLevel() {
 	setLevel(state.game.level + 1);
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	clearInterval(intervalId);
-	$(".timer").innerText = "0:00:00";
 	state.game.correctAns.length = 0;
 	localStorage.setItem(curLvlKey, state.game.level);
 	localStorage.setItem(curScoreKey, state.game.totalScore);
@@ -489,7 +489,6 @@ function endGame() {
 	$(".final-score-lbl").innerText = formatNumber(state.game.lvlScore);
 	setActiveMenu(MENU_OVER);
 	clearInterval(intervalId);
-	$(".timer").innerText = "0:00:00";
 	state.game.correctAns.length = 0;
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	localStorage.setItem(curLvlKey, 0);
