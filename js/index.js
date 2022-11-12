@@ -78,7 +78,7 @@ const state = {
 		// Run time of current game.
 		time: 0,
 		// List of the correct answers so far
-		correctAns: [],
+		correctAns: {},
 		// Score of the current level
 		lvlScore: 0,
 		// Score of all level
@@ -462,7 +462,7 @@ function setLevel(level) {
 //////////////////
 function resetGame() {
 	state.game.time = 0;
-	state.game.correctAns.length = 0;
+	for (var member in state.game.correctAns) delete state.game.correctAns[member];
 	clearInterval(intervalId);
 	setLevel(0);
 	setLvlScore(0);
@@ -486,7 +486,7 @@ function endLevel() {
 	setLevel(state.game.level + 1);
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	clearInterval(intervalId);
-	state.game.correctAns.length = 0;
+	for (var member in state.game.correctAns) delete state.game.correctAns[member];
 	localStorage.setItem(curLvlKey, state.game.level);
 	localStorage.setItem(curScoreKey, state.game.totalScore);
 	setLvlScore(0);
@@ -496,7 +496,7 @@ function endGame() {
 	$(".final-score-lbl").innerText = formatNumber(state.game.lvlScore);
 	setActiveMenu(MENU_OVER);
 	clearInterval(intervalId);
-	state.game.correctAns.length = 0;
+	for (var member in state.game.correctAns) delete state.game.correctAns[member];
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	localStorage.setItem(curLvlKey, 0);
 	localStorage.setItem(curLvlScore, 0);
@@ -523,23 +523,27 @@ const setViewCanvas = (viewCanvas, molBlock, transform = false) => {
 	viewCanvas.loadMolecule(mol);
 };
 
-const displayCorrectAns = (molBlock) => {
+const displayCorrectAns = (molBlock, isomerName) => {
 	const molLs = $(".duplicates");
-	console.log(molLs)
+	const isomerSet = document.createElement("div");
+	const nameHdr = document.createElement("h3");
+	nameHdr.innerText = isomerName;
+	isomerSet.appendChild(nameHdr);
 	const span = document.createElement("span");
 	const canvas2d = document.createElement("canvas");
 	const canvas3d = document.createElement("canvas");
 	span.appendChild(canvas2d);
 	span.appendChild(canvas3d);
 	span.style.display = "inline-block";
-	molLs.appendChild(span);
+	isomerSet.appendChild(span);
+	molLs.appendChild(isomerSet)
 
-	const canvas2dId = `canvas${state.game.correctAns.length}0`;
+	const canvas2dId = `canvas${Object.keys(state.game.correctAns).length}0`;
 	canvas2d.setAttribute("id", canvas2dId);
 	const viewCanvas2d = new ChemDoodle.ViewerCanvas(canvas2dId, 150, 150);
 	setViewCanvas(viewCanvas2d, molBlock);
 
-	const canvas3dId = `canvas${state.game.correctAns.length}1`;
+	const canvas3dId = `canvas${Object.keys(state.game.correctAns).length}1`;
 	canvas3d.setAttribute("id", canvas3dId);
 	const viewCanvas3d = new ChemDoodle.TransformCanvas3D(canvas3dId, 150, 150);
 	setViewCanvas(viewCanvas3d, molBlock, true);
@@ -605,13 +609,14 @@ const checkOneMol = async () => {
 			await getData(endPoint + "/single_result").then((response) => {
 				correct = response["correct"];
 				notDup = response["notDup"];
+				const isomerName = response["isomer"];
 				state.game.correctAns = response["correctAns"];
 
 				console.log(response);
 
 				if (correct && notDup) {
 					changeScore(levels[state.game.level].molScore);
-					displayCorrectAns(data["molBlock"]);
+					displayCorrectAns(data["molBlock"], isomerName);
 					clearCanvas();
 					correctSound.play();
 					getMolAlert(correctIcon, CORRECT);
