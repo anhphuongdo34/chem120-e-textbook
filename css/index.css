@@ -279,6 +279,14 @@ audio {
 	display: none;
 }
 
+sub {
+	font-size: 2rem;
+}
+
+.level-descrptn{
+	font-size: 2rem;
+}
+
 .final-score-lbl,
 .level-score-lbl {
 	font-size: 5rem;

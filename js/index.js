@@ -205,6 +205,8 @@ function renderBonusEffect(timeNode, totalScoreNode) {
 		} else {
 			timeUpSound.pause();
 			totalScoreNode.innerText = formatNumber(state.game.totalScore);
+
+			state.game.time = 0;
 			bonusSound.play();
 			if (isNewHighScore()) {
 				highScoreLblNode.textContent = "New High Score!";
@@ -227,7 +229,7 @@ const levelNode = $(".level");
 const scoreNode = $(".level-score");
 
 function renderScoreHud() {
-	levelNode.innerText = `LEVEL ${state.game.level + 1}: ${
+	levelNode.innerHTML = `LEVEL ${state.game.level + 1}: ${
 		levels[state.game.level].name
 	}`;
 	scoreNode.style.display = "block";
@@ -473,7 +475,6 @@ function resumeGame() {
 function endLevel() {
 	levelScoreLblNode.innerText = formatNumber(state.game.lvlScore);
 	setActiveMenu(MENU_NEXT);
-	state.game.time = 0;
 	setLevel(state.game.level + 1);
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	clearInterval(intervalId);
@@ -487,7 +488,6 @@ function endLevel() {
 function endGame() {
 	$(".final-score-lbl").innerText = formatNumber(state.game.lvlScore);
 	setActiveMenu(MENU_OVER);
-	state.game.time = 0;
 	clearInterval(intervalId);
 	$(".timer").innerText = "0:00:00";
 	state.game.correctAns.length = 0;
