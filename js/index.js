@@ -262,9 +262,7 @@ const getMolAlert = (iconNode, alertMessage) => {
 ///////////
 // Sound //
 ///////////
-$(".bg-music-src").src = "./js/bg-music/bgMusic.wav";
 $("#bg-music").muted = false;
-$("#bg-music").play();
 const soundBtnNode = $(".sound-control");
 function renderSoundIcon() {
 	soundBtnNode.innerHTML = state.sound ? soundOn : soundOff;
