@@ -12,8 +12,8 @@ const dupDeduct = 5;
 const incorrectDeduct = 10;
 
 // Game constants
-const endPoint = "http://127.0.0.1:5000/";
-// const endPoint = "https://chem120-game.up.railway.app/";
+// const endPoint = "http://127.0.0.1:5000/";
+const endPoint = "https://chem120-game.up.railway.app/";
 
 // Interaction state
 let pointerIsDown = false;
@@ -268,6 +268,7 @@ const getMolAlert = (iconNode, alertMessage) => {
 ///////////
 // Sound //
 ///////////
+$("#bg-music").src = "./js/bg-music/bgMusic.wav"
 $("#bg-music").muted = false;
 const soundBtnNode = $(".sound-control");
 function renderSoundIcon() {
