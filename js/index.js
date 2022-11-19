@@ -227,6 +227,12 @@ function renderBonusEffect(timeNode, totalScoreNode) {
 	}, countingUpRate);
 }
 
+const formatTargetTime = (timeInSecs) => {
+	const minutes = parseInt(timeInSecs/60)
+	const seconds = parseInt(timeInSecs%60)
+	return `${minutes} mins ${seconds ? `${seconds} secs` : ""}` 
+}
+
 ///////////
 // Score //
 ///////////
@@ -359,6 +365,7 @@ renderMenus();
 // Button Actions //
 ////////////////////
 const startGameLvl1 = () => {
+	$(".target-time").innerText = `Target time: ${formatTargetTime(levels[state.game.level].maxTime)}`
 	clearInterval(intervalId);
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	$(".timer").innerText = "0:00:00";
@@ -368,6 +375,7 @@ const startGameLvl1 = () => {
 };
 
 const startLvl = () => {
+	$(".target-time").innerText = `Target time: ${formatTargetTime(levels[state.game.level].maxTime)}`
 	$(".duplicates").innerHTML = "<h2>You have found these isomers</h2>";
 	clearInterval(intervalId);
 	$(".timer").innerText = "0:00:00";
