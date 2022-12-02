@@ -1,5 +1,3 @@
-// TODO: What need to be tested
-
 
 // start the game from the beginning (level 1)
 //  - timer

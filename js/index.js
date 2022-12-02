@@ -705,3 +705,9 @@ window.addEventListener("keydown", (event) => {
 		isPaused() ? resumeGame() : pauseGame();
 	}
 });
+
+window.addEventListener("keypress", async (event) => {
+	if (event.key === "Enter" && !isPaused()) {
+		await checkOneMol();
+	}
+});
