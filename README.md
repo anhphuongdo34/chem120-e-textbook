@@ -22,9 +22,9 @@ The project contains a game to quiz about the understanding of isomers in organi
 
 5. Clone the repo to your local computer
 
-        git clone git@github.com:<your-username>/chem120-e-textbook.git
+        git clone git@github.com:<your-username>/chem120-game.git
         cd chem120-e-textbook
-        git remote add upstream git@github.com:anhphuongdo34/chem120-e-textbook.git
+        git remote add upstream git@github.com:anhphuongdo34/chem120-game.git
         git remote set-url --push upstream DO_NOT_PUSH
         
         
