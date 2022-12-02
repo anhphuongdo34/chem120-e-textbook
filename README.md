@@ -4,7 +4,12 @@
 The project contains a game to quiz about the understanding of isomers in organic chemistry for students of CHEM 120 at DePauw University.
 
 ## Setting up
-1. Install `Homebrew` and use it to install `npm` and `nvm`. (For MacOS)
+1. Installation
+  + Download the appropriate version of [VSCode](https://code.visualstudio.com/download) for your operating system.
+  + (**For MacOS**) Install `Homebrew` and use it to install `npm` and `nvm`.
+  + (**For Window**) Install `nodejs`and add it to path.
+  + (**For Linux**) Install `npm` and `nvm` from terminal.
+  
 2. Add the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension to `Visual Studio Code` for debugging.
 
 3. Set up the SSH key on your computer
@@ -12,19 +17,25 @@ The project contains a game to quiz about the understanding of isomers in organi
   - Follow steps 1-4 of the instruction to [Generate a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
   - Follow steps 1-9 of the instruction to [Add a new SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
 
-4. Clone the repo to your local computer
+4. Fork the repo to your GitHub account (click `Fork` on the top right of the screen)
+![image](https://user-images.githubusercontent.com/71036845/205376704-712cf395-3bbf-497c-abca-05d0e5137dda.png)
 
-        git clone git@github.com:anhphuongdo34/chem120-e-textbook.git
-        npm install
+5. Clone the repo to your local computer
+
+        git clone git@github.com:<your-username>/chem120-e-textbook.git
+        cd chem120-e-textbook
+        git remote add upstream git@github.com:anhphuongdo34/chem120-e-textbook.git
+        git remote set-url --push upstream DO_NOT_PUSH
+        
         
 ## Contribution
 (replace anything with the `<>` with your own content)
 
-1. Before making any changes run `git pull`. The make changes in the code on the `master` branch
+1. Before making any changes run `git fetch upstream` then `git rebase upstream/master`. The make changes in the code on the `master` branch
 
 2. Create a new branch. If the changes associate with a specific `issue`, name the branch after the number of the issue.
 
-        git checkout -b <branch_name>
+        git checkout -b <new_branch_name>
 
 3. Pull all the updates from upstream before commit new changes
 
