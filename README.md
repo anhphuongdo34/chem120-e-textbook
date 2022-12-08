@@ -28,11 +28,11 @@ The project contains a game to quiz about the understanding of isomers in organi
         git remote set-url --push upstream DO_NOT_PUSH
         
 ## For Jeff
-To updates the changes made by students on your local computer
+To **updates the changes** made by students on your local computer
 
         git pull
         
-To send your changes to GitHub so the students can use them
+To **send your changes** to GitHub so the students can use them
 
         git push
 
