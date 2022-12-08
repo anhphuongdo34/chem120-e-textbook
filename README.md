@@ -65,5 +65,5 @@ Might need to resolve merge conflicts. Follow the instruction on the terminal.
 5. Make a Pull Request (PR) on GitHub.
 
 ## Acknowledgement
-- This project uses ChemDoodle Web Components. The link to [web.ChemDoodle.com](web.ChemDoodle.com) and/or [www.ChemDoodle.com](www.ChemDoodle.com).
+- This project uses ChemDoodle Web Components. The link to [web.ChemDoodle.com](https://web.chemdoodle.com/) and/or [www.ChemDoodle.com](https://www.ChemDoodle.com).
 - Thank you Dr. Jeff Hansen, Professor of Chemistry and Biochemistry at DePauw University, for designing the game for the introductory Chemistry courses.
