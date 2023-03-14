@@ -1,11 +1,11 @@
 body {
 	margin: 0;
 	/* background-image: radial-gradient(ellipse at top, #335476 0.0%, #31506e 11.1%, #304b67 22.2%, #2f4760 33.3%, #2d4359 44.4%, #2c3f51 55.6%, #2a3a4a 66.7%, #293643 77.8%, #28323d 88.9%, #262e36 100.0%); */
-	background-image: url(https://media.tenor.com/JYKx4QQuaD4AAAAd/chemistry.gif);
-	background-color: rgba(0, 0, 0, 0.5);
+	background-image: url(./test.gif);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	position: relative;
 	height: 100vh;
 	overflow: hidden;
 
@@ -15,15 +15,34 @@ body {
 	color: rgba(255, 255, 255, 0.75);
 }
 
+
 .sound-control {
 	position: absolute;
 	z-index: 500;
-	bottom: 0;
+	bottom: 40px;
 	right: 0;
 	background-color: rgba(0, 0, 0, 0);
 	border-color: rgba(0, 0, 0, 0);
 }
 
+@media (max-width: 1025px) {
+	.sound-control {
+		bottom: 120px;
+	}
+
+	h1 {
+		font-size: xx-large;
+	}
+
+	h2 {
+		font-size: 2.4em;
+	}
+
+	button {
+		font-size: 3rem;
+	}
+
+}
 
 /*//////////////////////
 //        GAME        //
@@ -32,6 +51,7 @@ body {
 .game {
 	visibility: hidden;
 	display: flex;
+	flex-direction: column;
 	max-height: 80vh;
 	gap: 10vh;
 	margin: 5vh 5vh;
@@ -47,19 +67,15 @@ body {
 	border-radius: 15px;
 }
 
+
+
 .game--command {
 	max-width: 20%;
 	display: flex;
 	padding: 0.8em 0.6em;
 }
 
-#c {
-	display: block;
-	touch-action: none;
-	transform: translateZ(0);
-}
-
-.game > .duplicates {
+.game>.duplicates {
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -71,7 +87,7 @@ body {
 
 .duplicates::-webkit-scrollbar {
 	display: none;
-  }
+}
 
 .duplicates>h2 {
 	margin: 0.8em 0.6em;
@@ -295,7 +311,13 @@ audio {
 }
 
 sub {
-	font-size: 2rem;
+	font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+	sub {
+		font-size: 2rem;
+	}
 }
 
 .level-descrptn {
@@ -406,13 +428,14 @@ a {
 }
 
 /* Tutorial page */
-menu--tutorial-pause,
+/* menu--tutorial-pause,
 menu--tutorial-main {
 	position: static;
-}
+} */
 
 .tutorial {
 	display: flex;
+	/* flex-direction: column; */
 	justify-content: space-evenly;
 	width: 100vw;
 	margin-bottom: 3%;
@@ -451,4 +474,13 @@ menu--tutorial-main {
 	}
 }
 
-/* @media () */
+
+@media (min-width: 1025px) {
+
+	.game,
+	.tutorial {
+		display: flex;
+		flex-direction: row;
+	}
+
+}

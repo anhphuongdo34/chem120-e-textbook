@@ -107,7 +107,7 @@ const setUpCanvas = (canvasId) => {
 	const options = {
 		useService: true,
 		oneMolecule: true,
-		// isMobile: true,
+		isMobile: true,
 	};
 
 	// Set up the ChemDoodle SketcherCanvas component
@@ -275,7 +275,7 @@ const getMolAlert = (iconNode, alertMessage) => {
 // Sound //
 ///////////
 $("#bg-music").src = "./js/bg-music/bgMusic.wav"
-$("#bg-music").muted = false;
+// $("#bg-music").muted = false;
 const soundBtnNode = $(".sound-control");
 function renderSoundIcon() {
 	soundBtnNode.innerHTML = state.sound ? soundOn : soundOff;
